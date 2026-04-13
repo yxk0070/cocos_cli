@@ -1,0 +1,13 @@
+{
+  "collision-matrix": [
+    [
+      true
+    ]
+  ],
+  "group-list": [
+    "default"
+  ],
+  "migrate-history": [
+    "cloud-function"
+  ]
+}
