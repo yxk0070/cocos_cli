@@ -10,6 +10,7 @@
   },
   {
     "__type__": "cc.Scene",
+    "_name": "MainScene",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -44,27 +45,10 @@
       "y": 1,
       "z": 1
     },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
     "_is3DNode": true,
-    "_groupIndex": 0,
     "groupIndex": 0,
     "autoReleaseAssets": false,
-    "_id": "339eb3fb-49fc-4984-954e-a201996ab90c"
+    "_id": "scene-id"
   },
   {
     "__type__": "cc.Node",
@@ -81,13 +65,10 @@
     "_active": true,
     "_components": [
       {
+        "__id__": 4
+      },
+      {
         "__id__": 5
-      },
-      {
-        "__id__": 6
-      },
-      {
-        "__id__": 7
       }
     ],
     "_prefab": null,
@@ -111,8 +92,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": -408.0,
-      "y": 309.3333333333333,
+      "x": 480,
+      "y": 320,
       "z": 0
     },
     "_scale": {
@@ -121,32 +102,7 @@
       "y": 1,
       "z": 1
     },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        480,
-        320,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
     "_is3DNode": false,
-    "_groupIndex": 0,
     "groupIndex": 0,
     "_id": "canvas-id"
   },
@@ -161,7 +117,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 4
+        "__id__": 6
       }
     ],
     "_prefab": null,
@@ -195,70 +151,9 @@
       "y": 1,
       "z": 1
     },
-    "_trs": {
-      "__type__": "TypedArray",
-      "ctor": "Float64Array",
-      "array": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1
-      ]
-    },
-    "_eulerAngles": {
-      "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
-      "z": 0
-    },
-    "_skewX": 0,
-    "_skewY": 0,
     "_is3DNode": false,
-    "_groupIndex": 0,
     "groupIndex": 0,
     "_id": "camera-id"
-  },
-  {
-    "__type__": "cc.Camera",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 3
-    },
-    "_enabled": true,
-    "_cullingMask": 4294967295,
-    "_clearFlags": 7,
-    "_backgroundColor": {
-      "__type__": "cc.Color",
-      "r": 0,
-      "g": 0,
-      "b": 0,
-      "a": 255
-    },
-    "_depth": -1,
-    "_zoomRatio": 1,
-    "_targetTexture": null,
-    "_fov": 60,
-    "_orthoSize": 320,
-    "_nearClip": 1,
-    "_farClip": 4096,
-    "_ortho": true,
-    "_rect": {
-      "__type__": "cc.Rect",
-      "x": 0,
-      "y": 0,
-      "width": 1,
-      "height": 1
-    },
-    "_renderStages": 1,
-    "_alignWithScreen": true,
-    "_id": "camera-comp-id"
   },
   {
     "__type__": "cc.Canvas",
@@ -301,17 +196,42 @@
     "_isAbsHorizontalCenter": true,
     "_isAbsVerticalCenter": true,
     "_originalWidth": 0,
-    "_originalHeight": 0,
-    "_id": "50TYRPaDlAKZ6uu+UCMOY9"
+    "_originalHeight": 0
   },
   {
-    "__type__": "8c599GCEjQSNBI0EjRWeJCr",
+    "__type__": "cc.Camera",
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 2
+      "__id__": 3
     },
     "_enabled": true,
-    "_id": "44l6jZonZDjorgq9v73hft"
+    "_cullingMask": 4294967295,
+    "_clearFlags": 7,
+    "_backgroundColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_depth": -1,
+    "_zoomRatio": 1,
+    "_targetTexture": null,
+    "_fov": 60,
+    "_orthoSize": 320,
+    "_nearClip": 1,
+    "_farClip": 4096,
+    "_ortho": true,
+    "_rect": {
+      "__type__": "cc.Rect",
+      "x": 0,
+      "y": 0,
+      "width": 1,
+      "height": 1
+    },
+    "_renderStages": 1,
+    "_alignWithScreen": true,
+    "_id": "camera-comp-id"
   }
 ]

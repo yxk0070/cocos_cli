@@ -29,43 +29,52 @@
 python3 -m venv venv
 source venv/bin/activate
 
-# 2. 安装依赖项 (OpenCV, Click, BeautifulSoup4 等)
-pip install -r requirements.txt
+# 2. 安装项目包及依赖 (支持全局命令)
+pip install -e .
 ```
+
+安装完成后，你可以在任何地方使用 `cocos-cli` 命令代替 `python main.py`。
 
 ---
 
 ## 📖 使用指南
 
-所有的操作都通过根目录下的 `main.py` 进行。
+所有的操作都通过命令行指令进行，本文档以 `cocos-cli` 为例。
 
 ### 0. 自动创建 Cocos 项目结构
 
-一键生成标准的 Cocos Creator (默认兼容 2.x) 项目文件及目录结构，包括 `project.json`、`tsconfig.json` 以及默认的空场景文件，方便后续流水线接管。
+一键生成标准的 Cocos Creator (默认兼容 2.x) 项目文件及目录结构，包括 `project.json`、`tsconfig.json`、`creator.d.ts` 以及默认的空场景文件，方便后续流水线接管。
 
 ```bash
-python main.py create-project ./my_new_game --version "2.4.12"
+# 不带参数时，将开启交互式提示要求你输入版本号 (默认为 2.4.14)
+cocos-cli create-project ./my_new_game
+
+# 或者直接传入版本号参数
+cocos-cli create-project ./my_new_game --version "2.4.14"
 ```
 
 ### 1. 图像识别与节点坐标自动调整
 
-利用 OpenCV 的模板匹配功能，在完整的设计稿截图中查找目标切图（UI 组件），提取坐标并自动更新到 Cocos 节点上。
+利用 OpenCV 的模板匹配功能，在完整的设计稿截图中查找目标切图（UI 组件），提取坐标并自动更新到 Cocos 节点上。支持设置设计分辨率和锚点映射。
 
 ```bash
-python main.py adjust-by-image \
+cocos-cli adjust-by-image \
     --main-image ./assets/design_main.png \
     --template-image ./assets/button_template.png \
     --scene ./assets/MainScene.fire \
     --node "LoginButton" \
+    --design-size 960x640 \
+    --parent-anchor 0.5,0.5 \
+    --node-anchor 0.5,0.5 \
     --threshold 0.8
 ```
 
 ### 2. Cocos 脚本自动化绑定
 
-自动解析脚本的 `.meta` 文件，获取其 UUID 并通过修改底层 JSON 结构，将脚本作为组件无缝绑定到指定的 Node 节点上。
+自动解析脚本的 `.meta` 文件，获取其 UUID（自动兼容 Cocos 的 22 位 Base64 压缩机制）并无缝绑定到指定的 Node 节点上。
 
 ```bash
-python main.py bind-script \
+cocos-cli bind-script \
     --scene ./assets/MainScene.fire \
     --node "LoginButton" \
     --script-meta ./assets/scripts/LoginManager.ts.meta \
@@ -74,18 +83,18 @@ python main.py bind-script \
 
 ### 3. 分析并打印项目场景/预制体树状结构
 
-将 `.fire` 场景文件或 `.prefab` 预制体文件解析为易读的层级树状图，展示所有的 Node 节点以及其挂载的组件（包含绑定的脚本 UUID），方便快速排查层级关系。
+将 `.fire` 场景文件或 `.prefab` 预制体文件解析为易读的层级树状图，展示所有的 Node 节点以及其挂载的组件，方便快速排查层级关系。
 
 ```bash
-python main.py tree ./my_new_game/assets/scenes/GameScene.fire
+cocos-cli tree ./my_new_game/assets/scenes/GameScene.fire
 ```
 
 ### 4. 官方文档 RAG 搜索
 
-遇到 Cocos 引擎 API 问题时，可直接通过本工具检索官方文档（docs.cocos.com），获取最新的接口片段或代码示例，为大模型生成代码提供最新上下文：
+遇到 Cocos 引擎 API 问题时，可直接通过本工具检索官方文档（docs.cocos.com），获取最新的接口片段或代码示例，为大模型生成代码提供最新上下文（已内建重试和超时退避机制）：
 
 ```bash
-python main.py rag-search "audio engine 3.8"
+cocos-cli rag-search "audio engine 3.8"
 ```
 
 ---

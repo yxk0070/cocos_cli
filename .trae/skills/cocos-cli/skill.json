@@ -1,0 +1,16 @@
+{
+  "name": "cocos-cli",
+  "description": "提供自动化操作 Cocos 项目能力的 CLI 智能体技能。包括但不限于项目生成、节点绑定、脚本更新和组件修改。",
+  "tools": [
+    {
+      "name": "execute_cocos_cli",
+      "description": "执行本地的 cocos-cli 命令以自动化操作 Cocos Creator 资源和脚本",
+      "parameters": {
+        "command": {
+          "type": "string",
+          "description": "cocos-cli 及其子命令，例如：cocos-cli rag-search \"audio engine 3.8\""
+        }
+      }
+    }
+  ]
+}

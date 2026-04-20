@@ -12,18 +12,35 @@ def cli():
     """DeerFlow-inspired Cocos Game CLI Tool for Image Recognition, Node Adjustment, and Script Binding"""
     pass
 
+def parse_tuple(val_str):
+    if not val_str:
+        return None
+    parts = val_str.split('x') if 'x' in val_str else val_str.split(',')
+    try:
+        return (float(parts[0]), float(parts[1]))
+    except ValueError:
+        return None
+
 @cli.command()
 @click.option('--main-image', required=True, help='Path to the main UI screenshot')
 @click.option('--template-image', required=True, help='Path to the template UI element image')
 @click.option('--scene', required=True, help='Path to the Cocos .fire or .prefab file')
 @click.option('--node', required=True, help='Name of the node to adjust')
 @click.option('--threshold', default=0.8, help='Matching threshold for image recognition (0.0 to 1.0)')
-def adjust_by_image(main_image, template_image, scene, node, threshold):
+@click.option('--design-size', default=None, help='Design resolution (e.g. 960x640)')
+@click.option('--parent-anchor', default='0.5,0.5', help='Anchor point of the parent node (e.g. 0.5,0.5)')
+@click.option('--node-anchor', default='0.5,0.5', help='Anchor point of the target node (e.g. 0.5,0.5)')
+def adjust_by_image(main_image, template_image, scene, node, threshold, design_size, parent_anchor, node_anchor):
     """Recognize UI element from image and adjust Cocos node position accordingly"""
     click.echo(f"[*] Starting image recognition: {template_image} in {main_image}")
     
+    ds_tuple = parse_tuple(design_size)
+    pa_tuple = parse_tuple(parent_anchor) or (0.5, 0.5)
+    na_tuple = parse_tuple(node_anchor) or (0.5, 0.5)
+    
     try:
-        matches = find_image_position(main_image, template_image, threshold)
+        matches = find_image_position(main_image, template_image, threshold, 
+                                      design_size=ds_tuple, parent_anchor=pa_tuple, node_anchor=na_tuple)
     except Exception as e:
         click.echo(f"[!] Image recognition failed: {e}")
         return
@@ -72,7 +89,8 @@ def bind_script(scene, node, script_meta, component_name):
 
 @cli.command()
 @click.argument('project_path')
-@click.option('--version', default='2.4.12', help='Cocos Creator version (e.g. 2.4.12)')
+@click.option('--version', prompt='Please enter the Cocos Creator version', 
+              default='2.4.14', help='Cocos Creator version (e.g. 2.4.14, 3.8.0)')
 def create_project(project_path, version):
     """Automatically create a basic Cocos Creator project structure"""
     create_cocos_project(project_path, version)
