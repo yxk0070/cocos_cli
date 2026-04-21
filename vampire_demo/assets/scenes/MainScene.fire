@@ -123,7 +123,9 @@
         "__id__": 6
       }
     ],
-    "_prefab": null,
+    "_prefab": {
+      "__id__": 8
+    },
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
@@ -248,5 +250,16 @@
     "__scriptAsset": {
       "__uuid__": "8c599182-0123-4567-89ab-cdef12345678"
     }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 3
+    },
+    "asset": {
+      "__uuid__": "b0cab79f-1565-4b4d-93c6-0d075b9d1a87"
+    },
+    "fileId": "6e353c5e-80a0-4197-bfb7-a468a67b641b",
+    "sync": false
   }
 ]

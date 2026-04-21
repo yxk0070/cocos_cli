@@ -89,7 +89,18 @@ cocos-cli bind-script \
 cocos-cli tree ./my_new_game/assets/scenes/GameScene.fire
 ```
 
-### 4. 官方文档 RAG 搜索
+### 4. 抽取节点为预置体 (Extract Prefab)
+
+将场景或现有预置体中的某个节点及其所有子节点、组件整体抽取为一个独立的 `.prefab` 文件，并自动在原文件中将其替换为该预置体的实例引用。这对于重构 UI 和组件复用非常有用。
+
+```bash
+cocos-cli extract-prefab \
+    --scene ./my_new_game/assets/scenes/GameScene.fire \
+    --node "Main Camera" \
+    --output ./my_new_game/assets/prefabs/MainCamera.prefab
+```
+
+### 5. 官方文档 RAG 搜索
 
 遇到 Cocos 引擎 API 问题时，可直接通过本工具检索官方文档（docs.cocos.com），获取最新的接口片段或代码示例，为大模型生成代码提供最新上下文（已内建重试和超时退避机制）：
 

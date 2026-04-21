@@ -96,6 +96,24 @@ def create_project(project_path, version):
     create_cocos_project(project_path, version)
 
 @cli.command()
+@click.option('--scene', required=True, help='Path to the source Cocos .fire or .prefab file')
+@click.option('--node', required=True, help='Name of the node to extract as a prefab')
+@click.option('--output', required=True, help='Path to save the new .prefab file')
+def extract_prefab(scene, node, output):
+    """Extract a node from a scene/prefab and save it as a new Prefab, linking it back."""
+    click.echo(f"[*] Parsing Cocos file: {scene}")
+    parser = CocosParser(scene)
+    
+    try:
+        prefab_path, prefab_uuid = parser.extract_prefab(node, output)
+        parser.save()
+        click.echo(f"[+] Successfully extracted '{node}' to {prefab_path}")
+        click.echo(f"[+] Prefab UUID: {prefab_uuid}")
+        click.echo(f"[+] Source file {scene} updated to reference the new Prefab.")
+    except Exception as e:
+        click.echo(f"[-] Failed to extract prefab: {e}")
+
+@cli.command()
 @click.argument('file_path')
 def tree(file_path):
     """Analyze and print the structure of a Cocos .fire or .prefab file"""
